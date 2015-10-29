@@ -443,7 +443,7 @@ after:
 
     {{ cjw_render_location( {'location': location, 'viewType': 'line'} ) }}
 
-Hint: the cjw_render_location is only working, if the fetch set the 'datamap' to false.
+Hint: the cjw_render_location is only working with Location, so the the 'datamap' in the fetch has to be false.
 
 {% set listChildren2 = cjw_fetch_content( [location.id], { 
 	'depth': '1', 
@@ -456,6 +456,8 @@ Hint: the cjw_render_location is only working, if the fetch set the 'datamap' to
     ID: {{  item.contentInfo.id }}, Name: {{  item.contentInfo.name }} <hr>
     {{ cjw_render_location( {'location': item, 'viewType': 'line'} ) }}
 {% endfor %}
+
+Nice would be to have a cjw_content_fetch and a cjw_object_fetch, so that datamap is not used for content or object disctinction.
 ***
 
 ###formbuilder<a name="FormBuilder"></a>
