@@ -304,6 +304,20 @@ get multiple location objects by location.ids
 	{{ dump( locationObject1 ) }}
 	{{ dump( locationObject2 ) }}
 	
+
+use another syntax  to fetch and iterate; the  [ location.id ] is added to the fetch instead to the iteration:
+	
+	{% set listChildren = cjw_fetch_content( [ location.id ], { 'depth': '1',
+			'limit': listLimit,
+			'offset': listOffset,
+			'include': [ 'cjw_folder', 'cjw_article', 'cjw_folder_section', 'cjw_file'  ],
+			'language': [],
+			'datamap': false,
+			'count': true } )[ location.id ] %}
+	{% for child in listChildren['children'] %}
+		{{ cjw_render_location( {'location': child, 'viewType': 'line'} )  }}
+	{% endfor %}
+
 ***
 
 <a name="cjw_load_content_by_id"></a>
@@ -445,17 +459,17 @@ after:
 
 Hint: the cjw_render_location is only working with Location, so the the 'datamap' in the fetch has to be false.
 
-{% set listChildren2 = cjw_fetch_content( [location.id], { 
-	'depth': '1', 
-	'limit': 0, 
-	'include' : ['cjw_folder'], 
-	'datamap':  false, 
-	'count': true } ) %}
-
-{% for item in listChildren2[ location.id ][ 'children' ] %}
-    ID: {{  item.contentInfo.id }}, Name: {{  item.contentInfo.name }} <hr>
-    {{ cjw_render_location( {'location': item, 'viewType': 'line'} ) }}
-{% endfor %}
+	{% set listChildren2 = cjw_fetch_content( [location.id], { 
+		'depth': '1', 
+		'limit': 0, 
+		'include' : ['cjw_folder'], 
+		'datamap':  false, 
+		'count': true } ) %}
+	
+	{% for item in listChildren2[ location.id ][ 'children' ] %}
+	    ID: {{  item.contentInfo.id }}, Name: {{  item.contentInfo.name }} <hr>
+	    {{ cjw_render_location( {'location': item, 'viewType': 'line'} ) }}
+	{% endfor %}
 
 Nice would be to have a cjw_content_fetch and a cjw_object_fetch, so that datamap is not used for content or object disctinction.
 ***
