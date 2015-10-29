@@ -437,12 +437,25 @@ override the ezimage field type template:
 
 before:
 
-    {{ render( controller(  'ez_content:viewLocation', { 'location': location 'viewType': 'line' } )  )  }}
+    {{ render( controller(  'ez_content:viewLocation', { 'location': location, 'viewType': 'line' } )  )  }}
 
 after:
 
     {{ cjw_render_location( {'location': location, 'viewType': 'line'} ) }}
 
+Hint: the cjw_render_location is only working, if the fetch set the 'datamap' to false.
+
+{% set listChildren2 = cjw_fetch_content( [location.id], { 
+	'depth': '1', 
+	'limit': 0, 
+	'include' : ['cjw_folder'], 
+	'datamap':  false, 
+	'count': true } ) %}
+
+{% for item in listChildren2[ location.id ][ 'children' ] %}
+    ID: {{  item.contentInfo.id }}, Name: {{  item.contentInfo.name }} <hr>
+    {{ cjw_render_location( {'location': item, 'viewType': 'line'} ) }}
+{% endfor %}
 ***
 
 ###formbuilder<a name="FormBuilder"></a>
