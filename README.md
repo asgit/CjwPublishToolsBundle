@@ -137,7 +137,7 @@ here you can find an example include temple for pagination: [:parts:navigator.ht
 | limit | integer | 0 | no | if 0 than all |
 | offset | integer | 0 | no | if 0 than no offset |
 | include | array | not set | no | if empty not set than all Content Types |
-| datamap | boolean | false | no | wenn false dann wird das Location Object zurückgeliefert, wenn true wird das Content Object zurückgeliefert |
+| datamap | boolean | false | no | if is set to 'false' a location object is return, if it is set 'true' a content object is returned |
 | sortby | array | not set | no | [ [ 'article', 'publish_date', 'DESC', 'eng-GB' ], [ 'DatePublished', 'DESC' ] ] |
 | language | array | not set | no | if empty not set than current language |
 | count | boolean | false | no | if true include result count for pagination |
